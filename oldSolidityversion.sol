@@ -56,35 +56,6 @@ contract SecureContract {
     // Other contract functions...
 }
 
-To mitigate the vulnerability in the code you provided, you need to implement proper access control. Here's an updated version of the code that addresses the vulnerability:
-
-solidity
-
-pragma solidity ^0.4.22;
-
-contract SecureContract {
-    address owner;
-
-    constructor() public {
-        owner = msg.sender;
-    }
-
-    modifier onlyOwner() {
-        require(msg.sender == owner, "Only the contract owner can call this function.");
-        _;
-    }
-
-    function transferOwnership(address newOwner) public onlyOwner {
-        owner = newOwner;
-    }
-
-    function withdraw() public onlyOwner {
-        msg.sender.transfer(address(this).balance);
-    }
-
-    // Other contract functions...
-}
-
 // Explanation:
 
 //     Constructor visibility: In Solidity versions starting from 0.4.22, the constructor must be defined as a separate 
